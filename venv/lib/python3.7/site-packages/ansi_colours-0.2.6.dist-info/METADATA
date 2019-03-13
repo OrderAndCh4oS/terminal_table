@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: ansi-colours
+Version: 0.2.6
+Summary: Library of static methods for colouring text in terminal output
+Home-page: https://github.com/sarcoma/Python_ANSI_Colours
+Author: sarcoma
+Author-email: sean@orderandchaoscreative.com
+License: MIT
+Project-URL: Order & Chaos Creative, https://orderandchaoscreative.com
+Platform: UNKNOWN
+
+Template
+========
+
+Static methods to wrap text in ANSI Colours.
+
+Installation
+------------
+
+Install by running:
+
+    pip install ansi_colours
+
+Usage
+-----
+
+    from ansi_colours import AnsiColours as colour
+
+    # Red text
+
+    colour.red("I'm red")
+
+License
+-------
+
+The project is licensed under the MIT license.
+
