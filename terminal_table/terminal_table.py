@@ -69,7 +69,19 @@ class Table:
         return tuple(text[x * width: (x + 1) * width] for x in range(len(text) // width + 1))
 
 if __name__ == '__main__':
-    plain = Table.create([[1, 2, 3], [4, 5, 6], [7, 8, 9]], ['a', 'b', 'c'], use_ansi=False)
+    long_text = 'Zombie ipsum brains reversus ab cerebellum viral inferno, brein nam rick mend grimes malum cerveau cerebro.'
+    wrapped_table = Table.create(
+        [[long_text[:10], long_text[:55], long_text[:25]],
+         [long_text[:5], long_text[:12], long_text[:33]],
+         [long_text[:35], long_text, long_text[:2]]],
+        ['a', 'b', 'c'],
+        column_width=20
+    )
+    print(wrapped_table)
+    plain = Table.create(
+        [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+        ['a', 'b', 'c'],
+        use_ansi=False)
     print(plain)
     colouredRows = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
