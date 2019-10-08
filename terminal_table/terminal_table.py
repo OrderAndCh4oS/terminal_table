@@ -63,6 +63,10 @@ class Table:
 
         return Colour.light_grey(underline) if use_ansi else underline
 
+    # TODO: Implemented as a stub for testing. Remove once #1 is resolved.
+    @staticmethod
+    def wrap_text(text, width=20):
+        return tuple(text[x * width: (x + 1) * width] for x in range(len(text) // width + 1))
 
 if __name__ == '__main__':
     plain = Table.create([[1, 2, 3], [4, 5, 6], [7, 8, 9]], ['a', 'b', 'c'], use_ansi=False)
