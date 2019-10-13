@@ -24,3 +24,5 @@ Print out headers and rows in to a table in the terminal.
     )
     print(table)
 ```
+
+![Screenshot of Pagination](/../screenshot/screenshot/table.png?raw=true "Pagination Example")
