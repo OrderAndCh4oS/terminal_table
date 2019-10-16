@@ -15,26 +15,28 @@ class Table:
             for i, column in enumerate(row):
                 if len(str(column)) > col_widths[i]:
                     col_widths[i] = len(str(column))
-        output = ''
-        output += "%s\n" % Table.make_row(
-            headers,
-            col_widths,
-            use_ansi,
-            column_colours=header_colours,
-            row_colour=header_colour
-        )
-        output += "%s\n" % Table.make_underline(col_widths, use_ansi)
+
+        output = [
+            "%s\n" % Table.make_row(
+                headers,
+                col_widths,
+                use_ansi,
+                column_colours=header_colours,
+                row_colour=header_colour
+            ),
+            "%s\n" % Table.make_underline(col_widths, use_ansi)
+        ]
         for i, row in enumerate(rows):
             row_colour = row_colours[i % len(row_colours)] if len(row_colours) else None
-            output += "%s\n" % Table.make_row(
+            output.append("%s\n" % Table.make_row(
                 row,
                 col_widths,
                 use_ansi,
                 column_colours=column_colours,
                 row_colour=row_colour
-            )
+            ))
 
-        return output
+        return "".join(output)
 
     @staticmethod
     def make_row(row, col_widths, use_ansi=True, separator="|", column_colours=None, row_colour=None):
@@ -43,25 +45,25 @@ class Table:
         if row_colour is None:
             row_colour = []
         separator = Colour.light_grey(separator) if use_ansi else separator
-        string = separator
+        output = [separator]
         for i, column in enumerate(row):
             data = str(column)
             if use_ansi:
                 colour = column_colours[i] if i < len(column_colours) else row_colour
                 if callable(colour):
                     data = colour(data)
-            padding = "".join([" " for _ in range(col_widths[i] - len(str(column)) + 2)])
-            string += "  " + data + padding + separator
+            padding = " " * (col_widths[i] - len(str(column)) + 2)
+            output.append("  {}{}{}".format(data, padding, separator))
 
-        return string
+        return "".join(output)
 
     @staticmethod
     def make_underline(col_widths, use_ansi=True, separator="|"):
-        underline = separator
+        underline = [separator]
         for width in col_widths:
-            underline += "".join(["-" for _ in range(width + 4)]) + "|"
+            underline.append("{}|".format("-" * (width + 4)))
 
-        return Colour.light_grey(underline) if use_ansi else underline
+        return Colour.light_grey("".join(underline)) if use_ansi else "".join(underline)
 
 
 if __name__ == '__main__':
