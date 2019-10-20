@@ -32,6 +32,8 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
+            pip install twine wheel setuptools
+            pip install pytest
             pip install -r requirements.txt
 
       - save_cache:
@@ -48,7 +50,6 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pip install pytest
             python3 -m pytest
 
       - store_artifacts:
@@ -66,7 +67,6 @@ jobs:
           name: upload to pypi
           command: |
             . venv/bin/activate
-            pip install wheel
             python3 setup.py sdist bdist_wheel
 
       - run:
@@ -80,6 +80,5 @@ jobs:
           name: upload to pypi
           command: |
             . venv/bin/activate
-            pip install twine
             twine check dist/*
             twine upload dist/*
