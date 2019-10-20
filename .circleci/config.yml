@@ -60,14 +60,14 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            python setup.py verify
+            python3 setup.py verify
 
       - run:
           name: upload to pypi
           command: |
             . venv/bin/activate
             pip install wheel
-            python3 -m setup.py sdist bdist_wheel
+            python3 setup.py sdist bdist_wheel
 
       - run:
           name: init .pypirc
