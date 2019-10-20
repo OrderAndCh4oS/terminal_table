@@ -1,10 +1,4 @@
 {
-  "test/test_output.py::test_coloured_columns": true,
-  "test/test_output.py::test_default": true,
-  "test/test_output.py::test_header_colour": true,
-  "test/test_output.py::test_multiple_header_colours": true,
-  "test/test_output.py::test_row_colours": true,
-  "test/test_output.py::test_rows_and_columns_with_colours": true,
   "test/test_output.py::test_text_wrap": true,
   "test/test_output.py::test_text_wrap_colour": true
 }
