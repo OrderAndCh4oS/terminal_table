@@ -151,7 +151,7 @@ if __name__ == '__main__':
         max_column_widths=(None, None, 40),
         use_ansi=False
     )
-    print(wrapped_table)
+    print(repr(wrapped_table))
     coloured_wrapped_table = Table.create(
         [[long_text[:14], long_text[:12], long_text[:35]],
          [long_text[:17], long_text[:4], long_text[:56]],
@@ -160,7 +160,7 @@ if __name__ == '__main__':
         max_column_width=20,
         column_colours=[Colour.red, Colour.blue, Colour.green]
     )
-    print(coloured_wrapped_table)
+    print(repr(coloured_wrapped_table))
 
     mixed_wrapped_table = Table.create(
         [[long_text[:14], long_text[:12], long_text[:35]],
@@ -170,41 +170,42 @@ if __name__ == '__main__':
         column_colours=[Colour.red, Colour.blue, Colour.green],
         max_column_widths=(30, 10)
     )
-    print(mixed_wrapped_table)
+    print('1', repr(mixed_wrapped_table))
 
     plain = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
         ['a', 'b', 'c'],
-        use_ansi=False)
-    print(plain)
+        use_ansi=False
+    )
+    print(repr(plain))
     colouredRows = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
         ['a', 'b', 'c'],
         row_colours=[Colour.red, Colour.blue]
     )
-    print(colouredRows)
+    print(repr(colouredRows))
     colouredCols = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
         ['a', 'b', 'c'],
         column_colours=[Colour.red, Colour.blue, Colour.green]
     )
-    print(colouredCols)
+    print(repr(colouredCols))
     colouredRowsAndCols = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
         ['a', 'b', 'c'],
         row_colours=[Colour.red, Colour.blue],
         column_colours=[Colour.green]
     )
-    print(colouredRowsAndCols)
+    print(repr(colouredRowsAndCols))
     colouredHeaders = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
         ['a', 'b', 'c'],
         header_colours=[Colour.red, Colour.yellow, Colour.red],
     )
-    print(colouredHeaders)
+    print(repr(colouredHeaders))
     colouredHeader = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
         ['a', 'b', 'c'],
         header_colour=Colour.cyan,
     )
-    print(colouredHeader)
+    print(repr(colouredHeader))
