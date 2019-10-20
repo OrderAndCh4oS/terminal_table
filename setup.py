@@ -5,7 +5,7 @@ from os import path, getenv
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
-VERSION = "0.5.0"
+VERSION = "0.5.1"
 
 here = path.abspath(path.dirname(__file__))
 
