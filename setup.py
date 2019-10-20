@@ -18,13 +18,14 @@ class VerifyVersionCommand(install):
     description = 'verify that the git tag matches our version'
 
     def run(self):
-        tag = getenv('CIRCLE_TAG')
-
-        if tag != VERSION:
-            info = "Git tag: {0} does not match the version of this app: {1}".format(
-                tag, VERSION
-            )
-            sys.exit(info)
+        pass
+        # tag = getenv('CIRCLE_TAG')
+        #
+        # if tag != VERSION:
+        #     info = "Git tag: {0} does not match the version of this app: {1}".format(
+        #         tag, VERSION
+        #     )
+        #     sys.exit(info)
 
 
 setup(
