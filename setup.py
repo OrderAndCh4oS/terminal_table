@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='terminal_table',
-    version='0.3.1',
+    version='0.4.0',
     description='Print headers and rows of data in terminal',
     long_description=long_description,
     long_description_content_type='text/markdown',
