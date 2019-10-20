@@ -43,7 +43,9 @@ jobs:
       - run:
           name: install package
           command: |
-            pip install --user  -e .
+            pip install --user wheel
+            python3 setup.py sdist bdist_wheel
+            pip install --user -e .
 
       # run tests!
       # this example uses Django's built-in test-runner
