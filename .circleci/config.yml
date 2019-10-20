@@ -32,20 +32,13 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install --user  --upgrade pip
-            pip install --user  -r requirements.txt
-
+            pip install --user --upgrade pip
+            pip install --user -r requirements.txt
+0
       - save_cache:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
-
-      - run:
-          name: install package
-          command: |
-            pip install --user wheel
-            python3 setup.py sdist bdist_wheel
-            pip install --user -e .
 
       # run tests!
       # this example uses Django's built-in test-runner
@@ -56,8 +49,27 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-             python -m pytest -vv
+             python -m pytest
 
       - store_artifacts:
           path: test-reports
           destination: test-reports
+
+      - run:
+          name: upload to pypi
+          command: |
+            . venv/bin/activate
+            twine upload dist/*
+
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = sarcoma" >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+
+      - run:
+          name: upload to pypi
+          command: |
+            . venv/bin/activate
+            twine upload dist/*
