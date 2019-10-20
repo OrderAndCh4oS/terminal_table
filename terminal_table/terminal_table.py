@@ -3,7 +3,7 @@ from ansi_colours import AnsiColours as Colour
 
 class Table:
     @staticmethod
-    def create(rows, headers, use_ansi=True, row_colours=None, column_colours=None, header_colours=None, header_colour=None, max_column_widths=20):
+    def create(rows, headers, use_ansi=True, row_colours=None, column_colours=None, header_colours=None, header_colour=None, max_column_widths=20, add_row_separator=True):
         if row_colours is None:
             row_colours = []
         if column_colours is None:
@@ -32,6 +32,9 @@ class Table:
         )
         output += "%s\n" % Table.make_underline(col_widths, use_ansi)
         for i, wrapped_row in enumerate(wrapped_rows):
+            if add_row_separator and 0 < i < len(wrapped_rows):
+                output += "%s\n" % Table.make_underline(col_widths, use_ansi)
+
             row_colour = row_colours[i % len(row_colours)] if len(row_colours) else None
             output += "%s\n" % Table.make_row(
                 wrapped_row,
