@@ -56,11 +56,11 @@ jobs:
           destination: test-reports
 
       - run:
-          name: upload to pypi
+          name: verify git tag vs. version
           command: |
+            python3 -m venv venv
             . venv/bin/activate
-            pip install twine
-            twine upload dist/*
+            python setup.py verify
 
       - run:
           name: init .pypirc
@@ -73,4 +73,5 @@ jobs:
           name: upload to pypi
           command: |
             . venv/bin/activate
+            pip install twine
             twine upload dist/*
