@@ -5,7 +5,7 @@ from os import path, getenv
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
-VERSION = "0.5.2"
+VERSION = "0.5.3"
 
 here = path.abspath(path.dirname(__file__))
 
@@ -19,13 +19,13 @@ class VerifyVersionCommand(install):
 
     def run(self):
         pass
-        # tag = getenv('CIRCLE_TAG')
-        #
-        # if tag != VERSION:
-        #     info = "Git tag: {0} does not match the version of this app: {1}".format(
-        #         tag, VERSION
-        #     )
-        #     sys.exit(info)
+        tag = getenv('CIRCLE_TAG')
+
+        if tag != VERSION:
+            info = "Git tag: {0} does not match the version of this app: {1}".format(
+                tag, VERSION
+            )
+            sys.exit(info)
 
 
 setup(
