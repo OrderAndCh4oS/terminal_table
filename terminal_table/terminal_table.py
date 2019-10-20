@@ -71,10 +71,10 @@ class Table:
                             data = colour(data)
 
                     padding = ' ' * (col_widths[i] - len(column[h]))
-                    string.append('  {}{}  {}'.format(data, padding, separator))
+                    string.append(f'  {data}{padding}  {separator}')
                 else:
                     padding = ' ' * col_widths[i]
-                    string.append('  {}  {}'.format(padding, separator))
+                    string.append(f'  {padding}  {separator}')
 
         return ''.join(string)
 
