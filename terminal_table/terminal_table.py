@@ -22,29 +22,31 @@ class Table:
         wrapped_rows = [Table.get_wrapped_row(row, max_column_widths) for row in rows]
         col_widths = Table.get_column_widths(wrapped_rows, wrapped_headers, max_column_widths)
 
-        output = ''
-        output += "%s\n" % Table.make_row(
+        output = [
+            "%s\n" % Table.make_row(
             wrapped_headers,
             col_widths,
             use_ansi,
             column_colours=header_colours,
             row_colour=header_colour
-        )
-        output += "%s\n" % Table.make_underline(col_widths, use_ansi)
+            ),
+            "%s\n" % Table.make_underline(col_widths, use_ansi)
+        ]
+
         for i, wrapped_row in enumerate(wrapped_rows):
             if add_row_separator and 0 < i < len(wrapped_rows):
                 output += "%s\n" % Table.make_underline(col_widths, use_ansi)
 
             row_colour = row_colours[i % len(row_colours)] if len(row_colours) else None
-            output += "%s\n" % Table.make_row(
+            output.append("%s\n" % Table.make_row(
                 wrapped_row,
                 col_widths,
                 use_ansi,
                 column_colours=column_colours,
                 row_colour=row_colour
-            )
+            ))
 
-        return output
+        return "".join(output)
 
     @staticmethod
     def make_row(wrapped_row, col_widths, use_ansi=True, separator='|', column_colours=None, row_colour=None):
@@ -78,11 +80,11 @@ class Table:
 
     @staticmethod
     def make_underline(col_widths, use_ansi=True, separator="|"):
-        underline = separator
+        underline = [separator]
         for width in col_widths:
-            underline += "".join(["-" for _ in range(width + 4)]) + "|"
+            underline.append("{}|".format("-" * (width + 4)))
 
-        return Colour.light_grey(underline) if use_ansi else underline
+        return Colour.light_grey("".join(underline)) if use_ansi else "".join(underline)
 
     @staticmethod
     def wrap_text(text, width=20):
