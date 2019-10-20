@@ -32,7 +32,6 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install --user --upgrade pip
             pip install --user -r requirements.txt
 
       - save_cache:
@@ -48,8 +47,9 @@ jobs:
       - run:
           name: run tests
           command: |
+            . venv/bin/activate
             pip install --user pytest
-            python -m pytest
+            python3 -m pytest
 
       - store_artifacts:
           path: test-reports
