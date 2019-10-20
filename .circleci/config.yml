@@ -28,6 +28,10 @@ jobs:
             - v1-dependencies-
 
       - run:
+          name: upgrade pip
+          command: pip install --upgrade pip
+
+      - run:
           name: install dependencies
           command: |
             python3 -m venv venv
