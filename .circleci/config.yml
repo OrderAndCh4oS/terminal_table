@@ -32,9 +32,9 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install twine wheel setuptools
-            pip install pytest
-            pip install -r requirements.txt
+            pip install -U twine wheel setuptools
+            pip install -U pytest
+            pip install -U -r requirements.txt
 
       - save_cache:
           paths:
