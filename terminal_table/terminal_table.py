@@ -1,9 +1,22 @@
+import collections.abc
+
 from ansi_colours import AnsiColours as Colour
 
 
 class Table:
     @staticmethod
-    def create(rows, headers, use_ansi=True, row_colours=None, column_colours=None, header_colours=None, header_colour=None, max_column_widths=20, add_row_separator=True):
+    def create(
+            rows,
+            headers,
+            use_ansi=True,
+            row_colours=None,
+            column_colours=None,
+            header_colours=None,
+            header_colour=None,
+            max_column_widths=None,
+            max_column_width=None,
+            add_row_separator=True
+    ):
         if row_colours is None:
             row_colours = []
         if column_colours is None:
@@ -11,24 +24,18 @@ class Table:
         if header_colours is None:
             header_colours = []
 
-        if max_column_widths is None:
-            max_column_widths = [float('inf')] * len(headers)
-        elif isinstance(max_column_widths, int):
-            max_column_widths = [max_column_widths] * len(headers)
-        else:
-            max_column_widths = [x if x is float('inf') else x for x in max_column_widths]
-
+        max_column_widths = Table.prepare_max_column_widths(headers, max_column_widths, max_column_width)
         wrapped_headers = Table.get_wrapped_row(headers, max_column_widths)
         wrapped_rows = [Table.get_wrapped_row(row, max_column_widths) for row in rows]
         col_widths = Table.get_column_widths(wrapped_rows, wrapped_headers, max_column_widths)
 
         output = [
             "%s\n" % Table.make_row(
-            wrapped_headers,
-            col_widths,
-            use_ansi,
-            column_colours=header_colours,
-            row_colour=header_colour
+                wrapped_headers,
+                col_widths,
+                use_ansi,
+                column_colours=header_colours,
+                row_colour=header_colour
             ),
             "%s\n" % Table.make_underline(col_widths, use_ansi)
         ]
@@ -47,6 +54,16 @@ class Table:
             ))
 
         return "".join(output)
+
+    @staticmethod
+    def prepare_max_column_widths(headers, max_column_widths, max_column_width):
+        if max_column_width is None:
+            max_column_width = float('inf')
+        if max_column_widths is None:
+            max_column_widths = [max_column_width] * len(headers)
+        elif isinstance(max_column_widths, collections.abc.Sequence) and not isinstance(max_column_widths, str):
+            max_column_widths = [max_column_width if x is None else x for x in max_column_widths]
+        return max_column_widths
 
     @staticmethod
     def make_row(wrapped_row, col_widths, use_ansi=True, separator='|', column_colours=None, row_colour=None):
@@ -130,6 +147,8 @@ if __name__ == '__main__':
          [long_text[:5], long_text[:12], long_text[:33]],
          [long_text[:12], long_text, long_text[:2]]],
         ['a', 'b', 'c'],
+        max_column_width=20,
+        max_column_widths=(None, None, 40),
         use_ansi=False
     )
     print(wrapped_table)
@@ -138,9 +157,21 @@ if __name__ == '__main__':
          [long_text[:17], long_text[:4], long_text[:56]],
          [long_text[:21], long_text[:5], long_text]],
         ['a', 'b', 'c'],
+        max_column_width=20,
         column_colours=[Colour.red, Colour.blue, Colour.green]
     )
     print(coloured_wrapped_table)
+
+    mixed_wrapped_table = Table.create(
+        [[long_text[:14], long_text[:12], long_text[:35]],
+         [long_text[:17], long_text[:4], long_text[:56]],
+         [long_text[:21], long_text[:5], long_text]],
+        ['a', 'b', 'c'],
+        column_colours=[Colour.red, Colour.blue, Colour.green],
+        max_column_widths=(30, 10)
+    )
+    print(mixed_wrapped_table)
+
     plain = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
         ['a', 'b', 'c'],
