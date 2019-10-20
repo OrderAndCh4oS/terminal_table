@@ -170,7 +170,7 @@ if __name__ == '__main__':
         column_colours=[Colour.red, Colour.blue, Colour.green],
         max_column_widths=(30, 10)
     )
-    print(repr(mixed_wrapped_table))
+    print('1', repr(mixed_wrapped_table))
 
     plain = Table.create(
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
