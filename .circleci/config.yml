@@ -48,8 +48,8 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
-             python -m pytest
+            pip install --user pytest
+            python -m pytest
 
       - store_artifacts:
           path: test-reports
