@@ -32,8 +32,8 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
+            pip install --user  --upgrade pip
+            pip install --user  -r requirements.txt
 
       - save_cache:
           paths:
@@ -43,7 +43,7 @@ jobs:
       - run:
           name: install package
           command: |
-            pip install -e .
+            pip install --user  -e .
 
       # run tests!
       # this example uses Django's built-in test-runner
