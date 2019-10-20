@@ -3,7 +3,7 @@ from os import path
 
 from setuptools import setup, find_packages
 
-VERSION = "0.5.4"
+VERSION = "1.0.0"
 
 here = path.abspath(path.dirname(__file__))
 
@@ -20,7 +20,7 @@ setup(
     author='sarcoma',
     author_email='sean@orderandchaoscreative.com',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
