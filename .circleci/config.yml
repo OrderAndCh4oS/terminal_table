@@ -81,4 +81,5 @@ jobs:
           command: |
             . venv/bin/activate
             pip install twine
+            twine check dist/*
             twine upload dist/*
