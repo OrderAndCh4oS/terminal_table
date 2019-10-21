@@ -51,7 +51,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            coverage run python3 -m pytest
+            coverage run pytest
 
       - store_artifacts:
           path: test-reports
