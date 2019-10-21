@@ -77,6 +77,7 @@ def test_text_wrap_colour():
         column_colours=[Colour.red, Colour.blue, Colour.green]
     ) == '\x1b[0;37m|\x1b[0m  a                     \x1b[0;37m|\x1b[0m  b             \x1b[0;37m|\x1b[0m  c                     \x1b[0;37m|\x1b[0m\n\x1b[0;37m|------------------------|----------------|------------------------|\x1b[0m\n\x1b[0;37m|\x1b[0m  \x1b[0;31mZombie ipsum b\x1b[0m        \x1b[0;37m|\x1b[0m  \x1b[0;34mZombie ipsum\x1b[0m  \x1b[0;37m|\x1b[0m  \x1b[0;32mZombie ipsum brains \x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                        \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32mreversus ab cer\x1b[0m       \x1b[0;37m|\x1b[0m\n\x1b[0;37m|------------------------|----------------|------------------------|\x1b[0m\n\x1b[0;37m|\x1b[0m  \x1b[0;31mZombie ipsum brai\x1b[0m     \x1b[0;37m|\x1b[0m  \x1b[0;34mZomb\x1b[0m          \x1b[0;37m|\x1b[0m  \x1b[0;32mZombie ipsum brains \x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                        \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32mreversus ab cerebell\x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                        \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32mum viral inferno\x1b[0m      \x1b[0;37m|\x1b[0m\n\x1b[0;37m|------------------------|----------------|------------------------|\x1b[0m\n\x1b[0;37m|\x1b[0m  \x1b[0;31mZombie ipsum brains \x1b[0m  \x1b[0;37m|\x1b[0m  \x1b[0;34mZombi\x1b[0m         \x1b[0;37m|\x1b[0m  \x1b[0;32mZombie ipsum brains \x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m  \x1b[0;31mr\x1b[0m                     \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32mreversus ab cerebell\x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                        \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32mum viral inferno, br\x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                        \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32mein nam rick mend gr\x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                        \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32mimes malum cerveau c\x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                        \x1b[0;37m|\x1b[0m                \x1b[0;37m|\x1b[0m  \x1b[0;32merebro.\x1b[0m               \x1b[0;37m|\x1b[0m\n'
 
+
 def test_text_wrap_variable():
     assert Table.create(
         [[long_text[:14], long_text[:12], long_text[:35]],
@@ -86,3 +87,90 @@ def test_text_wrap_variable():
         column_colours=[Colour.red, Colour.blue, Colour.green],
         max_column_widths=(30, 10)
     ) == '\x1b[0;37m|\x1b[0m  a                      \x1b[0;37m|\x1b[0m  b           \x1b[0;37m|\x1b[0m\n\x1b[0;37m|-------------------------|--------------|\x1b[0m\n\x1b[0;37m|\x1b[0m  \x1b[0;31mZombie ipsum b\x1b[0m         \x1b[0;37m|\x1b[0m  \x1b[0;34mZombie ips\x1b[0m  \x1b[0;37m|\x1b[0m\n\x1b[0;37m|\x1b[0m                         \x1b[0;37m|\x1b[0m  \x1b[0;34mum\x1b[0m          \x1b[0;37m|\x1b[0m\n\x1b[0;37m|-------------------------|--------------|\x1b[0m\n\x1b[0;37m|\x1b[0m  \x1b[0;31mZombie ipsum brai\x1b[0m      \x1b[0;37m|\x1b[0m  \x1b[0;34mZomb\x1b[0m        \x1b[0;37m|\x1b[0m\n\x1b[0;37m|-------------------------|--------------|\x1b[0m\n\x1b[0;37m|\x1b[0m  \x1b[0;31mZombie ipsum brains r\x1b[0m  \x1b[0;37m|\x1b[0m  \x1b[0;34mZombi\x1b[0m       \x1b[0;37m|\x1b[0m\n'
+
+
+def test_prepare_max_column_widths_given_max_column_widths_is_none_returns_infinity():
+    expected_widths = [float('inf'), float('inf'), float('inf')]
+    max_column_widths = Table.prepare_max_column_widths(["a", "b", "c"], None, None)
+    assert max_column_widths == expected_widths
+
+
+def test_prepare_max_column_widths_given_max_column_widths_is_set_returns_max_col_widths_as_list():
+    expected_widths = [30, 10]
+    max_column_widths = Table.prepare_max_column_widths(["a", "b", "c"], (30, 10), None)
+    assert max_column_widths == expected_widths
+
+
+def test_prepare_max_column_widths_given_max_column_widths_is_string_returns_max_col_widths_string():
+    expected_widths = "(30, 10)"
+    max_column_widths = Table.prepare_max_column_widths(["a", "b", "c"], "(30, 10)", None)
+    assert max_column_widths == expected_widths
+
+
+def test_prepare_max_column_widths_given_max_column_widths_is_none_returns_max_col_widths_of_max_length():
+    expected_widths = [20, 20, 20]
+    max_column_widths = Table.prepare_max_column_widths(["a", "b", "c"], None, 20)
+    assert max_column_widths == expected_widths
+
+
+def test_wrap_test_given_text_less_than_width_doesnt_wrap():
+    character = "a"
+    expected_tuple = ('aaaaaaaaaa',)
+    text_tuple = Table.wrap_text(character * 10, 11)
+    assert text_tuple == expected_tuple
+
+
+def test_wrap_test_given_text_greater_than_width_wraps():
+    character = "a"
+    expected_tuple = ('aaaaaaaa', 'aa')
+    text_tuple = Table.wrap_text(character * 10, 8)
+    assert text_tuple == expected_tuple
+
+
+def test_wrap_test_given_text_equal_to_width_wraps():
+    character = "a"
+    expected_tuple = ('aaaaaaaa', '')
+    text_tuple = Table.wrap_text(character * 8, 8)
+    assert text_tuple == expected_tuple
+
+
+def test_wrap_test_given_width_is_infinity_returns_text_as_string():
+    text = "aaaaaa" * 100000
+    expected = ("aaaaaa" * 100000,)
+    assert Table.wrap_text(text, float('inf')) == expected
+
+
+def test_get_row_height_given_cell_with_two_rows_returns_max_height():
+    assert Table.get_row_height([('Zombie ipsum b',), ('Zombie ips', 'um'), ('Zombie ips', 'um', 'oops')]) == 3
+
+
+def test_get_row_height_given_cell_equal_rows_returns_max_height():
+    assert Table.get_row_height([('Zombie ipsum b',), ('Zombie ips',)]) == 1
+
+
+def test_get_row_height_given_empty_returns_zero():
+    assert Table.get_row_height([]) == 0
+
+
+def test_get_column_widths_for_row_given_empty_returns_empty():
+    assert Table.get_column_widths_for_row([]) == []
+
+
+def test_get_column_widths_for_row_returns_max_widths():
+    assert Table.get_column_widths_for_row([('Zombie ipsum b',), ('Zombie ips', 'um')]) == [14, 10]
+
+
+def test_get_wrapped_row_given_row_of_data_returns_wrapped_rows():
+    expected_wrapped_row = [(long_text[:10],), (long_text[:5],), (long_text[:25],)]
+    rows = Table.get_wrapped_row([long_text[:10], long_text[:5], long_text[:25]], [100, 100, 100])
+    assert rows == expected_wrapped_row
+
+
+def test_get_wrapped_row_given_empty_returns_empty():
+    assert [] == Table.get_wrapped_row([], [])
+
+
+def test_get_wrapped_row_given_row_of_data_returns_wrapped_rows():
+    expected_wrapped_row = [(long_text[:5], long_text[5:10], '')]
+    rows = Table.get_wrapped_row([long_text[:10]], [5])
+    assert rows == expected_wrapped_row
