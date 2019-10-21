@@ -1,11 +1,8 @@
 # Always prefer setuptools over distutils
-from os import path
 
 from setuptools import setup, find_packages
 
-VERSION = "1.0.4"
-
-here = path.abspath(path.dirname(__file__))
+VERSION = "1.0.5"
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
