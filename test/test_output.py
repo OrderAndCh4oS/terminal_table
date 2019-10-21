@@ -179,3 +179,15 @@ def test_get_wrapped_row_given_row_of_data_returns_wrapped_rows():
     expected_wrapped_row = [(long_text[:5], long_text[5:10], '')]
     rows = Table.get_wrapped_row([long_text[:10]], [5])
     assert rows == expected_wrapped_row
+
+
+def test_make_underline_if_using_ansi():
+    assert Table.make_underline([2, 2, 2]) == "\x1b[0;37m|------|------|------|\x1b[0m"
+
+
+def test_make_underline_if_not_using_ansi():
+    assert Table.make_underline([2, 2, 2], use_ansi=False) == "|------|------|------|"
+
+
+def test_make_underline_with_custom_separator():
+    assert Table.make_underline([2, 2, 2], use_ansi=False, separator="o") == "o------|------|------|"
