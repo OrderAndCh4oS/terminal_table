@@ -114,23 +114,23 @@ def test_prepare_max_column_widths_given_max_column_widths_is_none_returns_max_c
 
 
 def test_wrap_test_given_text_less_than_width_doesnt_wrap():
-    character = "a"
-    expected_tuple = ('aaaaaaaaaa',)
-    text_tuple = Table.wrap_text(character * 10, 11)
+    text_ = long_text[:10]
+    expected_tuple = (text_,)
+    text_tuple = Table.wrap_text(text_, 11)
     assert text_tuple == expected_tuple
 
 
 def test_wrap_test_given_text_greater_than_width_wraps():
-    character = "a"
-    expected_tuple = ('aaaaaaaa', 'aa')
-    text_tuple = Table.wrap_text(character * 10, 8)
+    text_ = long_text[:10]
+    expected_tuple = (long_text[:8], long_text[8:10])
+    text_tuple = Table.wrap_text(text_, 8)
     assert text_tuple == expected_tuple
 
 
 def test_wrap_test_given_text_equal_to_width_wraps():
-    character = "a"
-    expected_tuple = ('aaaaaaaa', '')
-    text_tuple = Table.wrap_text(character * 8, 8)
+    text_ = long_text[:10]
+    expected_tuple = (text_, '')
+    text_tuple = Table.wrap_text(text_, 10)
     assert text_tuple == expected_tuple
 
 
@@ -141,11 +141,13 @@ def test_wrap_test_given_width_is_infinity_returns_text_as_string():
 
 
 def test_get_row_height_given_cell_with_two_rows_returns_max_height():
-    assert Table.get_row_height([('Zombie ipsum b',), ('Zombie ips', 'um'), ('Zombie ips', 'um', 'oops')]) == 3
+    text_ = long_text[:10]
+    assert Table.get_row_height([(text_,), (text_, text_), (text_, text_, text_)]) == 3
 
 
 def test_get_row_height_given_cell_equal_rows_returns_max_height():
-    assert Table.get_row_height([('Zombie ipsum b',), ('Zombie ips',)]) == 1
+    text_ = long_text[:10]
+    assert Table.get_row_height([(text_,), (text_,)]) == 1
 
 
 def test_get_row_height_given_empty_returns_zero():
@@ -157,7 +159,10 @@ def test_get_column_widths_for_row_given_empty_returns_empty():
 
 
 def test_get_column_widths_for_row_returns_max_widths():
-    assert Table.get_column_widths_for_row([('Zombie ipsum b',), ('Zombie ips', 'um')]) == [14, 10]
+    low_value = 10
+    high_value = 25
+    row = [(long_text[:low_value],), (long_text[:high_value], 'um')]
+    assert Table.get_column_widths_for_row(row) == [low_value, high_value]
 
 
 def test_get_wrapped_row_given_row_of_data_returns_wrapped_rows():

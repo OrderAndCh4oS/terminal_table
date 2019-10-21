@@ -1,11 +1,3 @@
 [
-  "test/test_output.py::test_default",
-  "test/test_output.py::test_row_colours",
-  "test/test_output.py::test_coloured_columns",
-  "test/test_output.py::test_rows_and_columns_with_colours",
-  "test/test_output.py::test_multiple_header_colours",
-  "test/test_output.py::test_header_colour",
-  "test/test_output.py::test_text_wrap",
-  "test/test_output.py::test_text_wrap_colour",
-  "test/test_output.py::test_text_wrap_variable"
+  "test/test_output.py::test_wrap_test_given_text_less_than_width_doesnt_wrap"
 ]
