@@ -99,7 +99,7 @@ class Table:
     def make_underline(col_widths, use_ansi=True, separator="|"):
         underline = [separator]
         for width in col_widths:
-            underline.append("{}|".format("-" * (width + 4)))
+            underline.append("{}{}".format("-" * (width + 4), separator))
 
         return Colour.light_grey("".join(underline)) if use_ansi else "".join(underline)
 
