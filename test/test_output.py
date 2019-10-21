@@ -190,4 +190,4 @@ def test_make_underline_if_not_using_ansi():
 
 
 def test_make_underline_with_custom_separator():
-    assert Table.make_underline([2, 2, 2], use_ansi=False, separator="o") == "o------|------|------|"
+    assert Table.make_underline([2, 2, 2], use_ansi=False, separator="+") == "+------+------+------+"
