@@ -137,7 +137,8 @@ class Table:
 
     @staticmethod
     def get_row_height(wrapped_row):
-        return max(len(col) for col in wrapped_row)
+        max_heights = [len(col) for col in wrapped_row]
+        return max(max_heights) if max_heights else 0
 
 
 if __name__ == '__main__':
