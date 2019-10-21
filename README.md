@@ -12,6 +12,12 @@ Run `pip install terminal_table` to install the package.
 
 Pass in a two dimensional `list` or `tuple` of data for the table rows and a `list` or `tuple` for the headers. 
 
+```python
+from terminal_table import Table
+
+print(Table.create(((1, 2, 3), (5, 6, 7)), ('a', 'b', 'c')))
+```
+
 You can optionally pass in some text colours for the header rows and columns with `AnsiColours`
 
 ### Import 
