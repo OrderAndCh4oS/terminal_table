@@ -1,6 +1,0 @@
-{
-  "test/test_output.py::test_get_row_height_given_empty_returns_0": true,
-  "test/test_output.py::test_prepare_max_column_widths_given_max_column_widths_is_none": true,
-  "test/test_output.py::test_prepare_max_column_widths_given_max_column_widths_is_string_returns_max_col_widths_tuple": true,
-  "test/test_output.py::test_prepare_max_column_widths_given_max_column_widths_string_returns_max_col_widths": true
-}
