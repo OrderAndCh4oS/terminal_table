@@ -34,6 +34,7 @@ jobs:
             . venv/bin/activate
             pip install -U twine wheel setuptools
             pip install -U pytest
+            pip install -U coverage
             pip install -U -r requirements.txt
 
       - save_cache:
@@ -50,11 +51,12 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            python3 -m pytest
+            coverage run -m pytest
+            coverage report
+            coverage html  # open htmlcov/index.html in a browser
 
       - store_artifacts:
-          path: test-reports
-          destination: test-reports
+          path: htmlcov
 
       - run:
           name: upload to pypi
