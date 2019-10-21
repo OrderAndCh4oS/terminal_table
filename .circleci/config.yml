@@ -16,6 +16,7 @@ jobs:
       # - image: circleci/postgres:9.4
 
     working_directory: ~/repo
+      -
 
     steps:
       - checkout
@@ -51,11 +52,12 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            coverage run pytest
+            $HOME/.local/bin/coverage run -m pytest
+            $HOME/.local/bin/coverage report
+            $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
 
       - store_artifacts:
-          path: test-reports
-          destination: test-reports
+          path: htmlcov
 
       - run:
           name: upload to pypi
