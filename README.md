@@ -4,9 +4,28 @@
 
 Print out headers and rows in to a table in the terminal.
 
-## Example 
+## Install 
+
+Run `pip install terminal_table` to install the package.
+
+## Usage
+
+Pass in a two dimensional `list` or `tuple` of data for the table rows and a `list` or `tuple` for the headers. 
+
+You can optionally pass in some text colours for the header rows and columns with `AnsiColours`
+
+### Import 
+
+`from terminal_table import Table`
+
+
+https://github.com/sarcoma/Python_ANSI_Colours
 
 ```python
+
+    from terminal_table import Table
+    from ansi_colours import AnsiColours as Colour
+    
     table = Table.create(
         (
             (1, "Johnathon", "Pollitt", "Seres"),
