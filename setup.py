@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-VERSION = "1.0.7"
+VERSION = "1.0.8"
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
