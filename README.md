@@ -1,5 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/sarcoma/terminal_table.svg?branch=master)](https://travis-ci.org/sarcoma/terminal_table)
+[![codecov](https://codecov.io/gh/sarcoma/terminal_table/branch/master/graph/badge.svg)](https://codecov.io/gh/sarcoma/terminal_table)
 
 # Python Table
 
