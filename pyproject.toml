@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "terminal_table"
+version = "2.0.0"
+description = "Print headers and rows of data in terminal"
+authors = ["Sarcoma <sean@orderandchaoscreative.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.5"
+ansi-colours = "^1.0.0"
+pytest = "^6.0.1"
+coverage = "^5.2.1"
+pytest-cov = "^2.10.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

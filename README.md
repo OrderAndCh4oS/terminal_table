@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/sarcoma/terminal_table/tree/master.svg?style=svg)](https://circleci.com/gh/sarcoma/terminal_table/tree/master)
+
 
 # Python Table
 
