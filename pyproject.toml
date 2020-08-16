@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "terminal_table"
-version = "2.0.0"
+version = "2.0.1"
 description = "Print headers and rows of data in terminal"
 authors = ["Sarcoma <sean@orderandchaoscreative.com>"]
 license = "MIT"
