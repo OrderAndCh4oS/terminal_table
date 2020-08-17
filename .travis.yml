@@ -6,7 +6,7 @@ python:
   - "3.8"
 
 script:
-- coverage run -m pytest
+- pytest --cov=./
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
